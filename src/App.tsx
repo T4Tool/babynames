@@ -14,6 +14,7 @@ import { FavoritesDrawer } from './components/FavoritesDrawer';
 import { CategoriesSection } from './components/CategoriesSection';
 import { TrendingSection } from './components/TrendingSection';
 import { BlogSection } from './components/BlogSection';
+import { SEOGuideModal } from './components/SEOGuideModal';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
 import { Sparkles, ArrowLeft, ArrowRight, Layers, SlidersHorizontal } from 'lucide-react';
@@ -69,6 +70,7 @@ export function App() {
   const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [isRandomOpen, setIsRandomOpen] = useState(false);
   const [isAIOpen, setIsAIOpen] = useState(false);
+  const [isSEOOpen, setIsSEOOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   // Toast state
@@ -261,6 +263,7 @@ export function App() {
         onOpenCompare={() => setIsCompareOpen(true)}
         onOpenRandom={() => setIsRandomOpen(true)}
         onOpenAI={() => setIsAIOpen(true)}
+        onOpenSEO={() => setIsSEOOpen(true)}
         onOpenBlogs={() => {
           document.getElementById('blog-section')?.scrollIntoView({ behavior: 'smooth' });
         }}
@@ -448,6 +451,7 @@ export function App() {
       <Footer
         onOpenAI={() => setIsAIOpen(true)}
         onOpenCategories={scrollToCategories}
+        onOpenSEO={() => setIsSEOOpen(true)}
         onSelectGender={(g) => {
           handleFilterChange({ gender: g });
           scrollToExplore();
@@ -527,6 +531,11 @@ export function App() {
             scrollToExplore();
           }
         }}
+      />
+
+      <SEOGuideModal
+        isOpen={isSEOOpen}
+        onClose={() => setIsSEOOpen(false)}
       />
 
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Search, Heart, Layers, Bot, Shuffle, Shield, Menu, X, BookOpen } from 'lucide-react';
+import { Sparkles, Search, Heart, Layers, Bot, Shuffle, Shield, Menu, X, BookOpen, Globe } from 'lucide-react';
 
 interface HeaderProps {
   favoritesCount: number;
@@ -9,6 +9,7 @@ interface HeaderProps {
   onOpenRandom: () => void;
   onOpenAI: () => void;
   onOpenBlogs: () => void;
+  onOpenSEO?: () => void;
   onFocusSearch: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -22,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenRandom,
   onOpenAI,
   onOpenBlogs,
+  onOpenSEO,
   onFocusSearch,
   activeTab,
   setActiveTab
@@ -111,6 +113,17 @@ export const Header: React.FC<HeaderProps> = ({
             <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
             Guides
           </button>
+          {onOpenSEO && (
+            <button
+              id="nav-seo-btn"
+              onClick={onOpenSEO}
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5 border border-emerald-500/20"
+              title="Google Search Console & SEO Guide"
+            >
+              <Globe className="w-3.5 h-3.5 text-emerald-400" />
+              <span>SEO</span>
+            </button>
+          )}
         </nav>
 
         {/* Action Buttons & Counters */}

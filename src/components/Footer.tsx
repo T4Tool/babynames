@@ -5,12 +5,14 @@ interface FooterProps {
   onOpenAI: () => void;
   onOpenCategories: () => void;
   onSelectGender: (gender: 'Boy' | 'Girl' | 'Unisex') => void;
+  onOpenSEO?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenAI,
   onOpenCategories,
   onSelectGender,
+  onOpenSEO
 }) => {
   return (
     <footer className="bg-[#030408] border-t border-white/[0.08] pt-16 pb-12 text-slate-400 text-sm">
@@ -95,7 +97,18 @@ export const Footer: React.FC<FooterProps> = ({
                   All Categories
                 </button>
               </li>
-              <li><span>SEO Sitemap</span></li>
+              <li>
+                <a href="/sitemap.xml" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">
+                  SEO Sitemap (.xml)
+                </a>
+              </li>
+              {onOpenSEO && (
+                <li>
+                  <button onClick={onOpenSEO} className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center gap-1">
+                    Google Search Console Guide
+                  </button>
+                </li>
+              )}
               <li><span>Etymology Dictionary</span></li>
               <li><span>Privacy & Security</span></li>
             </ul>

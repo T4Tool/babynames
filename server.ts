@@ -37,6 +37,73 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+// Dynamic robots.txt for Google Search Console crawlers
+app.get("/robots.txt", (req, res) => {
+  const host = req.get('host') || 'localhost:3000';
+  const protocol = req.protocol || 'https';
+  res.type('text/plain');
+  res.send(`User-agent: *
+Allow: /
+
+Sitemap: ${protocol}://${host}/sitemap.xml
+`);
+});
+
+// Dynamic XML Sitemap for Google Search Indexing
+app.get("/sitemap.xml", (req, res) => {
+  const host = req.get('host') || 'localhost:3000';
+  const protocol = req.protocol || 'https';
+  const baseUrl = `${protocol}://${host}`;
+  const currentDate = new Date().toISOString().split('T')[0];
+
+  res.type('application/xml');
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${baseUrl}/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?gender=Boy</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?gender=Girl</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?gender=Unisex</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?category=Modern</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?category=Royal</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${baseUrl}/?category=Nature</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>`);
+});
+
 // Analytics Endpoint
 app.get("/api/analytics", (_req, res) => {
   res.json(analytics);
