@@ -5,6 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+      base: '/babynames/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
