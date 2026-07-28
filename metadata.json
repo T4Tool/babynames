@@ -1,0 +1,6 @@
+{
+  "name": "BabyNames — Baby & Unique Name Finder",
+  "description": "World-class premium baby and unique names discovery engine with 10,000+ curated names, origins, meanings, smart filters, and AI recommendations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
